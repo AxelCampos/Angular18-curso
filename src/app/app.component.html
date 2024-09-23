@@ -1,7 +1,11 @@
-<main>
-  <h1>Hello, {{ title }}</h1>
-  <p>Congratulations! Your app is running. 🎉</p>
-</main>
+<app-header></app-header>
+<app-main></app-main>
 
+<button [disabled]="!formValid">Guardar</button>
+<button [attr.aria-label]="label1">Test</button>
 
+<button (click)="testClick($event)">Test Click</button>
+
+<input [(ngModel)]="nombre">
+<button (click)="mostrarValor()">Mostrar</button>
 <router-outlet />
