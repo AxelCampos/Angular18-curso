@@ -1,7 +1,8 @@
-<p>main works!</p>
-
 @for (task of listTasks; track $index) {
-  <app-comment comment="{{task.name}}"></app-comment>
+  <app-comment [text]="task.text" [author]="task.author.name" [date]="task.date" [callback]="removeComment($index)"></app-comment>
 } @empty {
-  <app-comment comment="Sin tareas"></app-comment>
+  <app-comment [text]="'Sin comentarios'"></app-comment>
 }
+
+<input [(ngModel)]="comment" (input)="onInputChangeComment($event)" type="text">
+<button (click)="addNewComment($event)" [disabled]="isDisabled"> Añadir</button>

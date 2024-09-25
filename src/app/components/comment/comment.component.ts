@@ -8,5 +8,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
-  @Input() comment: string = 'comentario'
+  @Input() text !: string;
+  @Input() author ?: string;
+  @Input() date ?: string;
+  @Input() callback?: () => void;
+
+  removeComment = () => {
+    if(this.callback)
+      this.callback();
+  }
 }

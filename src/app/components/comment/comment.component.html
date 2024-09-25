@@ -1,1 +1,7 @@
-<li>{{comment}}</li>
+<div>
+  <p>{{text}} {{author}}</p>
+  <p>{{date}}</p>
+  @if (author === 'Axel') {
+    <button (click)="removeComment()">Borrar</button>
+  }
+</div>
