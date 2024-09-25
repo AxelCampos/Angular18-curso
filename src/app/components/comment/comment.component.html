@@ -1,7 +1,16 @@
-<div>
-  <p>{{text}} {{author}}</p>
-  <p>{{date}}</p>
+<div class="container">
+  <div class="text">
+    <div class="infoComment">
+      <p>{{text}}</p>
+      <p>{{date}}</p>
+    </div>
+    <div class="infoAuthor">
+      <p>{{author}}</p>
+    </div>
+  </div>
   @if (author === 'Axel') {
-    <button (click)="removeComment()">Borrar</button>
+    <div class="action">
+      <button (click)="removeComment()">Eliminar</button>
+    </div>
   }
 </div>
