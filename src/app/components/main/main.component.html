@@ -1,8 +1,8 @@
 <div class="container">
-  @for (task of listTasks; track $index) {
-    <app-comment [text]="task.text" [author]="task.author.name" [date]="task.date" [callback]="removeComment($index)"></app-comment>
+  @for (task of comments; track $index) {
+    <app-comment (usuarioBorrado)="removeComment($index)" [comment]="task"></app-comment>
   } @empty {
-    <app-comment [text]="'Sin comentarios'"></app-comment>
+    Sin comentarios
   }
   <div>
     <input [(ngModel)]="comment" (input)="onInputChangeComment($event)" type="text">

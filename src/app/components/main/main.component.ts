@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
 import { FormsModule } from '@angular/forms';
+import { Comment } from '../../interfaces/comment';
+import { Author } from '../../interfaces/author';
+import { CommentsService } from '../../services/comments/comments.service';
 
 
-interface Author {
-  id: number
-  name: string
-}
-
-interface Comment {
-  text: string;
-  author: Author;
-  date: string
-}
 
 @Component({
   selector: 'app-main',
@@ -22,24 +15,19 @@ interface Comment {
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  listTasks: Comment[] = [
-    {text: 'Este es el primer comentario', author: {id:1, name: 'Axel'}, date: '09-09-2024'},
-    {text: 'Este es el segundo comentario', author: {id: 2, name: 'Mari Carmen'}, date: '09-09-2024'},
-    {text: 'Este es el tercer comentario', author: {id:3, name: 'Jose Luis'}, date: '09-09-2024'},
-  ];
+
+  constructor(private commentService: CommentsService){}
 
   isDisabled: boolean = true;
   comment: string = '';
+  comments !: Comment[];
+
+  ngOnInit() {
+    this.comments = this.commentService.getAll()
+  }
 
   addNewComment = (event: any) => {
-    const author: Author = {id: 1, name: 'Axel'};
-    const date: string =  '24-09-2024'
-
-    this.listTasks.push({
-      text: this.comment,
-      author: author,
-      date: date
-    })
+    this.commentService.addComment(this.comment)
 
     this.comment = "";
     this.isDisabled = true;
@@ -50,8 +38,6 @@ export class MainComponent {
   }
 
   removeComment =(index: number) => {
-    return () => {
-      this.listTasks.splice(index, 1);
-    }
+    this.commentService.removeComment(index);
   }
 }

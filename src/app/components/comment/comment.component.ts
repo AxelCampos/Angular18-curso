@@ -1,20 +1,28 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
+import { Comment } from '../../interfaces/comment';
+import { UserService } from '../../services/user/user.service';
+import { Author } from '../../interfaces/author';
 
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
-  @Input() text !: string;
-  @Input() author ?: string;
-  @Input() date ?: string;
-  @Input() callback?: () => void;
+  constructor(private userService: UserService){}
+
+  @Input() comment !: Comment;
+  @Output() usuarioBorrado = new EventEmitter<void>();
+
+  usuarioConectado !: Author
+  ngOnInit () {
+    this.usuarioConectado = this.userService.getUserConnected();
+  }
 
   removeComment = () => {
-    if(this.callback)
-      this.callback();
+    this.usuarioBorrado.emit();
   }
 }

@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="text">
-    <div class="infoComment">
-      <p>{{text}}</p>
-      <p>{{date}}</p>
+    <div class="text">
+      <div class="infoComment">
+        <p>{{comment.text}}</p>
+        <p>{{comment.date}}</p>
+      </div>
+      <div class="infoAuthor">
+        <p>{{comment.author.name}}</p>
+      </div>
     </div>
-    <div class="infoAuthor">
-      <p>{{author}}</p>
-    </div>
-  </div>
-  @if (author === 'Axel') {
-    <div class="action">
-      <button (click)="removeComment()">Eliminar</button>
-    </div>
-  }
+    @if (comment.author.name === usuarioConectado.name) {
+      <div class="action">
+        <app-button [action]="removeComment" [text]="'Eliminar'">Eliminar</app-button>
+      </div>
+    }
 </div>
