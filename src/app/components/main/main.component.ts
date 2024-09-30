@@ -17,8 +17,6 @@ import { CommentsService } from '../../services/comments/comments.service';
 export class MainComponent {
 
   constructor(private commentService: CommentsService){}
-
-  isDisabled: boolean = true;
   comment: string = '';
   comments !: Comment[];
 
@@ -30,11 +28,6 @@ export class MainComponent {
     this.commentService.addComment(this.comment)
 
     this.comment = "";
-    this.isDisabled = true;
-  }
-
-  onInputChangeComment = (event: any) => {
-    this.isDisabled = !(this.comment.length > 0);
   }
 
   removeComment =(index: number) => {

@@ -5,7 +5,7 @@
     Sin comentarios
   }
   <div>
-    <input [(ngModel)]="comment" (input)="onInputChangeComment($event)" type="text">
-    <button (click)="addNewComment($event)" [disabled]="isDisabled"> Añadir</button>
+    <input [(ngModel)]="comment" type="text">
+    <button (click)="addNewComment($event)" [disabled]="!comment"> Añadir</button>
   </div>
 </div>

@@ -1,16 +1,15 @@
 <div class="container">
     <div class="text">
       <div class="infoComment">
-        <p>{{comment.text}}</p>
+        <p>{{ comment.text | truncate }}</p>
         <p>{{comment.date}}</p>
       </div>
       <div class="infoAuthor">
         <p>{{comment.author.name}}</p>
       </div>
     </div>
-    @if (comment.author.name === usuarioConectado.name) {
-      <div class="action">
-        <app-button [action]="removeComment" [text]="'Eliminar'">Eliminar</app-button>
-      </div>
-    }
+    <div class="action">
+      <button *appCheckUser="{userId: comment.author.id, negate: true}" [routerLink]="['/user-details', comment.author.id]">Detalles de usuario</button>
+      <app-button *appCheckUser="{userId:comment.author.id}" [action]="removeComment" [text]="'Eliminar'"></app-button>
+    </div>
 </div>
