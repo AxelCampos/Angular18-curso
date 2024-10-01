@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ImageComponent } from "../image/image.component";
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-info-user',
@@ -9,6 +10,8 @@ import { ImageComponent } from "../image/image.component";
   styleUrl: './info-user.component.css'
 })
 export class InfoUserComponent {
-  firstName: string = 'Axel Iago'
-  lastName: string = 'Campos Bonnet'
+  constructor(private userService: UserService){
+    this.user = this.userService.getUserConnected()?.name
+  }
+  user!: string
 }
